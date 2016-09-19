@@ -13,7 +13,10 @@ public class Person {
     }
 
     public boolean marry(Person person){
+        //TODO: null pointer
         if(this.spouce == person || this.man == person.get_gender()) return false;
+
+        //--->>>>
         else if(this.man != person.get_gender() && !this.is_marry() && !person.is_marry()) {
             this.spouce = person;
             person.set_spouce(this);
@@ -21,8 +24,13 @@ public class Person {
         else {
             this.divorse();
             person.divorse();
-            this.marry(person);
+            this.marry(person); //TODO: too difficult
         }
+        //<<<<<<<<------ TODO: just
+        // divorse();
+        // person.divorse();
+        // spouce = person;
+        // person.spouce = this;
         return true;
     }
 
@@ -30,24 +38,29 @@ public class Person {
         if(this.is_marry()){
             Person former_spouce = this.get_spouce();
             this.spouce = null;
-            former_spouce.divorse();
+            former_spouce.divorse(); //TODO: null pointer
             return true;
         }
         return false;
     }
 
+    //TODO: please use camel style: getGender() or isMan()
     public boolean get_gender(){
         return this.man;
     }
 
+    //TODO: please use camel style
     public boolean is_marry(){
         if(spouce == null) return false;
         else return true;
     }
+    //TODO: please use camel style
     public Person get_spouce(){
         return this.spouce;
     }
 
+    //TODO: please use camel style
+    //TODO: dangerous method - have to be private
     public void set_spouce(Person person){
         this.spouce = person;
     }
