@@ -13,55 +13,40 @@ public class Person {
     }
 
     public boolean marry(Person person){
-        //TODO: null pointer
-        if(this.spouce == person || this.man == person.get_gender()) return false;
-
-        //--->>>>
-        else if(this.man != person.get_gender() && !this.is_marry() && !person.is_marry()) {
-            this.spouce = person;
-            person.set_spouce(this);
-        }
+        if(this.spouce == person && this.spouce != null || this.man == person.isMan()) return false;
         else {
-            this.divorse();
+            divorse();
             person.divorse();
-            this.marry(person); //TODO: too difficult
+            this.spouce = person;
+            person.setSpouce(this);
+            return true;
         }
-        //<<<<<<<<------ TODO: just
-        // divorse();
-        // person.divorse();
-        // spouce = person;
-        // person.spouce = this;
-        return true;
     }
 
     public boolean divorse(){
-        if(this.is_marry()){
-            Person former_spouce = this.get_spouce();
+        if(this.isMarry()){
+            Person former_spouce = this.getSpouce();
             this.spouce = null;
-            former_spouce.divorse(); //TODO: null pointer
+            former_spouce.setSpouce(null);
             return true;
         }
         return false;
     }
 
-    //TODO: please use camel style: getGender() or isMan()
-    public boolean get_gender(){
+    public boolean isMan(){
         return this.man;
     }
 
-    //TODO: please use camel style
-    public boolean is_marry(){
+    public boolean isMarry(){
         if(spouce == null) return false;
         else return true;
     }
-    //TODO: please use camel style
-    public Person get_spouce(){
+
+    public Person getSpouce(){
         return this.spouce;
     }
 
-    //TODO: please use camel style
-    //TODO: dangerous method - have to be private
-    public void set_spouce(Person person){
+    private void setSpouce(Person person){
         this.spouce = person;
     }
 
@@ -76,8 +61,9 @@ public class Person {
         System.out.println(bob.marry(janny));
 
         System.out.println(mike.marry(janny));
-        System.out.println(alisa.is_marry());
-        System.out.println(bob.is_marry());
+        System.out.println(alisa.isMarry());
+        System.out.println(bob.isMarry());
 
     }
 }
+
