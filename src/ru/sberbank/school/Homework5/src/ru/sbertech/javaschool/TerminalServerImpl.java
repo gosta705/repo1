@@ -1,16 +1,16 @@
-package package ru.sberbank.school.Homework5;
+package ru.sbertech.javaschool;
 
 
-import Exception.NotEnoughMoneyException;
+import ru.sbertech.javaschool.Exception.NotEnoughMoneyException;
 
 public class TerminalServerImpl implements TerminalServer {
 
-    private int currentAccountBalance = 100000;
+    private double currentAccountBalance = 100000;
 
     public TerminalServerImpl(){};
 
     @Override
-    public int checkAccountBalance() {
+    public double checkAccountBalance() {
         return currentAccountBalance;
     }
 
@@ -25,7 +25,7 @@ public class TerminalServerImpl implements TerminalServer {
     }
 
     @Override
-    public boolean depositMoney(int amount) {
+    public boolean depositMoney(double amount) {
         currentAccountBalance += amount;
         return true;
     }

@@ -1,10 +1,11 @@
-package package ru.sberbank.school.Homework5;
+package ru.sbertech.javaschool;
 
 
 import java.util.Calendar;
-import Exception.AccountLockedException;
-import Exception.NotValidAmountException;
-import Exception.PinNotEnteredException;
+import ru.sbertech.javaschool.Exception.AccountLockedException;
+import ru.sbertech.javaschool.Exception.NotValidAmountException;
+import ru.sbertech.javaschool.Exception.PinNotEnteredException;
+
 
 public class TerminalImpl implements Terminal {
 
@@ -15,7 +16,7 @@ public class TerminalImpl implements Terminal {
     private int numberOfIncorrectPin = 0;
 
     @Override
-    public int checkAccountBalance() {
+    public double checkAccountBalance() {
         pinCodeIsEntreid();
         return server.checkAccountBalance();
     }
@@ -28,18 +29,18 @@ public class TerminalImpl implements Terminal {
     }
 
     @Override
-    public boolean depositMoney(int amount) {
+    public boolean depositMoney(double amount) {
         pinCodeIsEntreid();
         if (amount <= 0 || amount % 100 != 0) throw new NotValidAmountException(" ");
         return server.depositMoney(amount);
     }
 
     @Override
-    public boolean getAccess(int pinCode) {
+    public boolean getAccess(String cardNumber, char[] pinCode) {
         if (System.currentTimeMillis() < unlockedTime.getTimeInMillis()) {
             throw new AccountLockedException(unlockedTime.getTime() + "");
         }
-        if (pinValidator.validate(pinCode)) {
+        if (pinValidator.validate(cardNumber, pinCode)) {
             pinCodeIsCorrect = true;
             return true;
         } else {

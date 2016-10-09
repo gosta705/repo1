@@ -1,4 +1,4 @@
-package package ru.sberbank.school.Homework5.Exception;
+package ru.sbertech.javaschool.Exception;
 
 
 public class NotEnoughMoneyException extends TerminalException {
