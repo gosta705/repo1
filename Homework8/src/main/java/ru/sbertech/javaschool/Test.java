@@ -5,7 +5,7 @@ import ru.sbertech.javaschool.Exception.TerminalException;
 
 public class Test {
     public static void main(String [] args){
-        Terminal testTerminal = new TerminalImpl();
+        /*Terminal testTerminal = new TerminalImpl();
         char[] myPinCode = new char[4];
         String myCardNumber = "4545121267678989";
 
@@ -69,7 +69,7 @@ public class Test {
         } catch (TerminalException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println();
+        System.out.println();*/
 
     }
 }
