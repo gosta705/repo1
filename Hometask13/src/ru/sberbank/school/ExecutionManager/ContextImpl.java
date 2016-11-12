@@ -2,59 +2,51 @@ package ru.sberbank.school.ExecutionManager;
 
 
 public class ContextImpl implements Context {
-    private volatile int wellDoneTask = 0;
-    private volatile int failedTask = 0;
-    private volatile int interruptedTask = 0;
-    private volatile boolean isFinish = false;
-    private volatile boolean isInterrupt = false;
+    private int numberOfTasks;
+    private int completedTasks = 0;
+    private int failedTasks = 0;
+    private int interruptedTasks = 0;
 
-    @Override
-    public int getCompletedTaskCount() {
-        return wellDoneTask;
+    public ContextImpl(int numberOfTasks) {
+        this.numberOfTasks = numberOfTasks;
     }
 
     @Override
-    public int getFailedTaskCount() {
-        return failedTask;
+    public synchronized int getCompletedTaskCount() {
+        return completedTasks;
     }
 
     @Override
-    public int getInterruptedTaskCount() {
-        return interruptedTask;
+    public synchronized int getFailedTaskCount() {
+        return failedTasks;
+    }
+
+    @Override
+    public synchronized int getInterruptedTaskCount() {
+        return interruptedTasks;
     }
 
     @Override
     public void interrupt() {
-        isInterrupt = true;
+
+    }
+    @Override
+    public boolean isFinished() {
+        return numberOfTasks == completedTasks + failedTasks + interruptedTasks;
     }
 
     @Override
-    public boolean isFinished() {
-        return isFinish;
+    public synchronized void increaseCompletedTaskCount() {
+        completedTasks++;
     }
 
-
-    public void addWellDoneTask() {
-        wellDoneTask++;
+    @Override
+    public synchronized void increaseFailedTaskCount() {
+        failedTasks++;
     }
 
-
-    public void addFailedTask() {
-        failedTask++;
-    }
-
-
-    public void addInterruptedTask() {
-        interruptedTask++;
-    }
-
-
-    public void finish() {
-        isFinish = true;
-    }
-
-
-    public boolean isInterrupt() {
-        return isInterrupt;
+    @Override
+    public synchronized void increaseInterruptedTaskCount(int inc) {
+        interruptedTasks+=inc;
     }
 }

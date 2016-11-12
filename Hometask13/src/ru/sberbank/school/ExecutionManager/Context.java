@@ -16,5 +16,11 @@ public interface Context {
 
     boolean isFinished();
 
+    void increaseCompletedTaskCount();
+
+    void increaseFailedTaskCount();
+
+    void increaseInterruptedTaskCount(int inc);
+
 
 }
